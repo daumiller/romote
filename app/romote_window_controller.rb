@@ -20,52 +20,73 @@ class RomoteWindowController < NSWindowController
 
   def windowDidLoad
     @lst_channel.removeAllItems
-    # attempt to find roku
-    # prompt for IP if not found (cancel exits)
+    @rocomm = RokuCommunicator.new self
+    @rocomm.search 3.0
+  end
+
+  def roku_device_found
+    if @rocomm.last_error
+      alert = NSAlert.new
+      alert.messageText = "Networking Error: #{@rocomm.last_error}."
+      alert.runModal
+      NSApp.terminate self
+    end
+
+    alert = NSAlert.new
+    alert.messageText = "Found Roku Device #{@rocomm.roku_id} at #{@rocomm.roku_service}."
+    alert.runModal
   end
 
   def non_text_input
-    self.window.makeFirstResponder nil
+    window.makeFirstResponder nil
     @txt_keyboard.setStringValue ''
   end
 
-  def press_back(sender)
+  def press_back(_sender)
     non_text_input
   end
-  def press_home(sender)
+
+  def press_home(_sender)
     non_text_input
   end
-  def press_up(sender)
+
+  def press_up(_sender)
     non_text_input
   end
-  def press_down(sender)
+
+  def press_down(_sender)
     non_text_input
   end
-  def press_left(sender)
+
+  def press_left(_sender)
     non_text_input
   end
-  def press_right(sender)
+
+  def press_right(_sender)
     non_text_input
   end
-  def press_select(sender)
-    non_text_input
-    alert = NSAlert.new
-    alert.messageText = "Select"
-    alert.runModal
-  end
-  def press_replay(sender)
+
+  def press_select(_sender)
     non_text_input
   end
-  def press_info(sender)
+
+  def press_replay(_sender)
     non_text_input
   end
-  def press_reverse(sender)
+
+  def press_info(_sender)
     non_text_input
   end
-  def press_play(sender)
+
+  def press_reverse(_sender)
     non_text_input
   end
-  def press_forward(sender)
+
+  def press_play(_sender)
+    non_text_input
+  end
+
+  def press_forward(_sender)
     non_text_input
   end
 
