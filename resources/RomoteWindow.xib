@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="RomoteWindowController">
+            <connections>
+                <outlet property="btn_back" destination="Uas-iR-Qxs" id="qro-xb-0mJ"/>
+                <outlet property="btn_down" destination="zjh-ns-wFS" id="0Oa-Hg-reS"/>
+                <outlet property="btn_forward" destination="cgB-ga-Kiq" id="lSg-XU-tq7"/>
+                <outlet property="btn_home" destination="cce-QC-cZh" id="CZY-XU-Noy"/>
+                <outlet property="btn_info" destination="WrZ-xq-rwK" id="tbz-jG-49u"/>
+                <outlet property="btn_left" destination="k6c-EF-SDK" id="eCC-JG-Q0V"/>
+                <outlet property="btn_play" destination="0CK-nz-QO3" id="WAb-Ck-utq"/>
+                <outlet property="btn_replay" destination="vm4-tO-S5m" id="SqC-24-cef"/>
+                <outlet property="btn_reverse" destination="uAu-WD-Uvk" id="xLd-n0-R1j"/>
+                <outlet property="btn_right" destination="A9n-87-72b" id="oXs-fv-I5F"/>
+                <outlet property="btn_select" destination="qz6-nQ-Tys" id="f3k-A1-t7v"/>
+                <outlet property="btn_up" destination="X7n-FA-exk" id="oC1-L1-ew4"/>
+                <outlet property="img_background" destination="dc7-S4-9JP" id="Vwc-OB-kEJ"/>
+                <outlet property="lst_channel" destination="ZKf-Hh-f2J" id="Ggm-MD-gZy"/>
+                <outlet property="txt_keyboard" destination="I67-gV-Sko" id="bvm-0j-3Cj"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="7hS-2B-TI2"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Romote" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="240" height="480"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <view key="contentView" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="0.0" width="240" height="480"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dc7-S4-9JP">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="480"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="skin_default" id="bj0-wO-Xka"/>
+                    </imageView>
+                    <button toolTip="Up" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X7n-FA-exk">
+                        <rect key="frame" x="86" y="351" width="68" height="51"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="gyU-ue-eJC">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_up:" target="-2" id="IH1-8Y-jx5"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Select" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qz6-nQ-Tys">
+                        <rect key="frame" x="88" y="284" width="60" height="63"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="6E7-bh-Vzd">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_select:" target="-2" id="8bk-rR-LCA"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Left" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k6c-EF-SDK">
+                        <rect key="frame" x="34" y="284" width="51" height="67"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="h6o-rL-ag3">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_left:" target="-2" id="m59-u0-Khq"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Right" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A9n-87-72b">
+                        <rect key="frame" x="156" y="284" width="49" height="67"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="GGZ-en-L18">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_right:" target="-2" id="6XZ-Il-gIa"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Down" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjh-ns-wFS">
+                        <rect key="frame" x="88" y="230" width="66" height="51"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="W0k-fu-ytM">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_down:" target="-2" id="5E2-Qc-xDQ"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Back" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uas-iR-Qxs">
+                        <rect key="frame" x="34" y="423" width="80" height="49"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="axesIndependently" inset="2" id="Bbr-wD-PYD">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_back:" target="-2" id="8Oz-S9-Pkp"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Home" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cce-QC-cZh">
+                        <rect key="frame" x="123" y="423" width="82" height="49"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="axesIndependently" inset="2" id="y3j-YN-Hn2">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_home:" target="-2" id="lKr-xf-8Dl"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Replay" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vm4-tO-S5m">
+                        <rect key="frame" x="32" y="163" width="82" height="48"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="sKU-WA-yN2">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_replay:" target="-2" id="Mkd-iy-YCr"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Info" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WrZ-xq-rwK">
+                        <rect key="frame" x="123" y="163" width="82" height="46"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="YNZ-m6-hkg">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_info:" target="-2" id="6ua-qY-bkA"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Reverse" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-WD-Uvk">
+                        <rect key="frame" x="34" y="104" width="51" height="51"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="m5r-mF-UMn">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_reverse:" target="-2" id="Dhs-M9-9b0"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Play/Pause" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0CK-nz-QO3">
+                        <rect key="frame" x="93" y="104" width="55" height="51"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="eKS-Fp-A84">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_play:" target="-2" id="F5T-I9-UvX"/>
+                        </connections>
+                    </button>
+                    <button toolTip="Forward" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgB-ga-Kiq">
+                        <rect key="frame" x="156" y="104" width="49" height="51"/>
+                        <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="eJP-Sb-0XB">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system" size="10"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="press_forward:" target="-2" id="pKN-ow-Z9Q"/>
+                        </connections>
+                    </button>
+                    <popUpButton toolTip="Select Channel" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZKf-Hh-f2J">
+                        <rect key="frame" x="21" y="61" width="200" height="22"/>
+                        <popUpButtonCell key="cell" type="inline" bezelStyle="inline" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="gkS-mB-EPy" id="JMh-Ka-qfi">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="smallSystemBold"/>
+                            <menu key="menu" id="Rcp-Fh-MG5">
+                                <items>
+                                    <menuItem state="on" id="gkS-mB-EPy"/>
+                                    <menuItem title="Item 2" id="qox-Mk-xKa"/>
+                                    <menuItem title="Item 3" id="laB-vV-Txi"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="select_channel:" target="-2" id="B93-Qu-7gQ"/>
+                        </connections>
+                    </popUpButton>
+                    <textField toolTip="Keyboard Input" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I67-gV-Sko">
+                        <rect key="frame" x="20" y="20" width="200" height="27"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="cCu-ik-Ej3">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="enter_text:" target="-2" id="o6y-cf-pLm"/>
+                        </connections>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="291" y="497"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="skin_default" width="57.599998474121094" height="115.19999694824219"/>
+    </resources>
+</document>
