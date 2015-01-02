@@ -11,5 +11,5 @@ end
 Motion::Project::App.setup do |app|
   app.name = 'romote'
   app.icon = 'romote.icns'
-  app.vendor_project('vendor/CocoaAsyncSocket', :static, :products => ['CocoaAsyncSocket.a'], :headers_dir => '.')
+  app.vendor_project('vendor/CocoaAsyncSocket', :static, :headers_dir => '.', :cflags => '-fobjc-arc')
 end
