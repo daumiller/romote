@@ -18,3 +18,5 @@ nbproject
 DerivedData/*
 ib.xcodeproj/*
 vendor/CocoaAsyncSocket/build-MacOSX/*
+vendor/Pod*
+resources/skin_default_source.png

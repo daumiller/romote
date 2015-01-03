@@ -1,4 +1,4 @@
-class RokuCommunicator < NSObject
+class RokuDiscovery < NSObject
 
   DISCOVERY_HOST   = '239.255.255.250'
   DISCOVERY_PORT   = 1900
@@ -17,8 +17,7 @@ class RokuCommunicator < NSObject
     self.last_error   = nil
   end
 
-  # this is mainly to validate 'manual' user entry, but caller can rely on it too.
-  # we'll allow:
+  # 'manual' entry validation, allowing:
   #   i) full service description : http://192.168.1.128:8060
   #  ii) ip and port only         :        192.168.1.128:8060
   # iii) ip only                  :        192.168.1.128
@@ -44,7 +43,7 @@ class RokuCommunicator < NSObject
   # search for local Roku devices with SSDP
   # if not found before timeout (in floating seconds) expires, prompt to Retry/Manually-Enter/Exit
   def search(timeout)
-    fail "RokuCommunicator.search_begin called during invalid state: #{@state}." if @state != :idle
+    fail "RokuDiscovery.search_begin called during invalid state: #{@state}." if @state != :idle
 
     @timeout = timeout
     @socket  =  GCDAsyncUdpSocket.alloc.initWithDelegateOnMainQueue self
@@ -124,7 +123,7 @@ class RokuCommunicator < NSObject
 
   # stop listening socket when a device is found || timeout reached
   def search_stop
-    fail "RokuCommunicator.search_stop called during invalid state: #{@state}." if @state != :searching
+    fail "RokuDiscovery.search_stop called during invalid state: #{@state}." if @state != :searching
     @socket.close
     @state = :idle
   end
@@ -157,20 +156,6 @@ class RokuCommunicator < NSObject
     @socket.close
     @state = :idle
     @delegate.roku_device_found
-  end
-
-  def channel_list
-    channel_list_retrieved = Proc.new { |response, error|
-      unless error.nil?
-        self.last_error = error
-        @delegate.roku_channels_retrieved {}
-        return
-      end
-      # parse into channels
-      puts "Channel List: #{response}"
-      @delegate.roku_channels_retrieved({ 'Netflix' => 2, 'Plex' => 33539 })
-    }
-    FragileHttpClient.get "#{roku_service}query/apps", channel_list_retrieved
   end
 
 end
