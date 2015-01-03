@@ -17,7 +17,6 @@ class RomoteWindowController < NSWindowController
   outlet :txt_keyboard  , NSTextField
   outlet :img_background, NSImageView
 
-
   def windowDidLoad
     @lst_channel.removeAllItems
     @rocomm = RokuCommunicator.new self
@@ -32,9 +31,23 @@ class RomoteWindowController < NSWindowController
       NSApp.terminate self
     end
 
-    alert = NSAlert.new
-    alert.messageText = "Found Roku Device #{@rocomm.roku_id} at #{@rocomm.roku_service}."
-    alert.runModal
+    # @rocomm.channel_list
+    url = @rocomm.roku_service + 'query/apps'
+  end
+
+  def roku_channels_retrieved(channels)
+    if @rocomm.last_error
+      alert = NSAlert.new
+      alert.messageText = "Error retrieving channel list from Roku. Other commands may not work."
+      alert.runModal
+      return
+    end
+
+    @channels = channels
+    @lst_channel.removeAllItems
+    @channels.each do |name, _|
+      @lst_channel.addItemWithTitle name
+    end
   end
 
   def non_text_input
@@ -91,7 +104,9 @@ class RomoteWindowController < NSWindowController
   end
 
   def select_channel(sender)
-    non_text_input
+    alert = NSAlert.new
+    alert.messageText = "Launch Channel \"#{sender.titleOfSelectedItem}\""
+    alert.runModal
   end
 
   def enter_text(sender)

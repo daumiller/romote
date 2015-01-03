@@ -17,6 +17,32 @@ class RokuCommunicator < NSObject
     self.last_error   = nil
   end
 
+  # this is mainly to validate 'manual' user entry, but caller can rely on it too.
+  # we'll allow:
+  #   i) full service description : http://192.168.1.128:8060
+  #  ii) ip and port only         :        192.168.1.128:8060
+  # iii) ip only                  :        192.168.1.128
+  def roku_service=(service)
+    if service.nil?
+      @roku_service = nil
+      return
+    end
+
+    if service.match /HTTP:\/\//i
+      fail "Bad Service Format '#{service}'." unless service.match /^HTTP:\/\/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+\/?$/i
+      service += '/' unless service.end_with? '/'
+    elsif service.match /:[0-9]+$/
+      fail "Bad Service Format '#{service}'." unless service.match /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+$/
+      service = "http://#{service}/"
+    else
+      fail "Bad Service Format '#{service}'." unless service.match /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/
+      service = "http://#{service}:8060/"
+    end
+    @roku_service = service
+  end
+
+  # search for local Roku devices with SSDP
+  # if not found before timeout (in floating seconds) expires, prompt to Retry/Manually-Enter/Exit
   def search(timeout)
     fail "RokuCommunicator.search_begin called during invalid state: #{@state}." if @state != :idle
 
@@ -47,39 +73,56 @@ class RokuCommunicator < NSObject
     performSelector 'search_timeout:', withObject: nil, afterDelay: @timeout
   end
 
+  # we'll get called whether or not a timeout has occured
   def search_timeout(_object)
+    return if roku_service
     begin
       search_stop
     rescue
+      # we could possibly run into a timing issue here.
+      # rescue search_stop errors if it happened to be working while we were.
       @socket.close
       @state = :idle
-      # not doing a check-and-return before calling stop,
-      # just so we don't have to deal with any timing issues...
     end
     return if roku_service
 
     # show our Retry/Manul/Exit prompt
-    alert = NSAlert.alertWithMessageText 'No Roku device found.',
-                          defaultButton: 'Retry Search',
-                        alternateButton: 'Enter Manually',
-                            otherButton: 'Exit',
-              informativeTextWithFormat: 'Roku IP address:'
-    roku_service = NSTextField.alloc.initWithFrame NSMakeRect(0, 0, 200, 24)
-    roku_service.setStringValue:'192.168.1.'
-    alert.setAccessoryView roku_service
+    first_manual_attempt = true
+    while true
+      alert = NSAlert.alertWithMessageText 'No Roku device found.',
+                            defaultButton: 'Retry Search',
+                          alternateButton: 'Enter Manually',
+                              otherButton: 'Exit',
+                informativeTextWithFormat: (first_manual_attempt ? 'Roku IP address:' : 'The address entered was not correctly formatted.')
+      roku_service = NSTextField.alloc.initWithFrame NSMakeRect(0, 0, 200, 24)
+      roku_service.setStringValue:'192.168.'
+      alert.setAccessoryView roku_service
 
-    result = alert.runModal
-    if result == NSAlertDefaultReturn
-      search @timeout
-    elsif result == NSAlertAlternateReturn
-      roku_service.validateEditing
-      self.roku_service = roku_service.stringValue
-      @delegate.roku_device_found
-    else
-      NSApp.terminate self
+      result = alert.runModal
+      if result == NSAlertDefaultReturn
+        search @timeout
+        return
+      elsif result == NSAlertAlternateReturn
+        roku_service.validateEditing
+        begin
+          self.roku_service = roku_service.stringValue
+        rescue
+          # invalid manual entry
+          first_manual_attempt = false
+        end
+        if first_manual_attempt
+          # valid manual entry
+          @delegate.roku_device_found
+          return
+        end
+      else
+        NSApp.terminate self
+        return
+      end
     end
   end
 
+  # stop listening socket when a device is found || timeout reached
   def search_stop
     fail "RokuCommunicator.search_stop called during invalid state: #{@state}." if @state != :searching
     @socket.close
@@ -87,39 +130,47 @@ class RokuCommunicator < NSObject
   end
 
   def udpSocket(socket, didReceiveData: data, fromAddress: address, withFilterContext: _filter)
-    puts 'udpSocket.A'
     return if roku_service
 
     message = NSString.alloc.initWithData data, encoding: NSUTF8StringEncoding
-    puts "udpSocket.B #{message}"
     return unless message
 
     lines = message.gsub("\r\n", "\n").split "\n"
     return unless lines.grep(/HTTP\/[0-9](\.[0-9]) 200 OK/).count == 1
-    puts 'udpSocket.C'
     return unless lines.grep(/ST: ROKU:ECP/i).count == 1
-    puts 'udpSocket.D'
 
     service_line = lines.grep /LOCATION: HTTP:\/\//i
     if service_line.count == 1
       service_line = service_line[0]
       found_service = service_line.match /HTTP:\/\/.+$/i
-      self.roku_service = found_service[0] if found_service.length == 1
+      self.roku_service = found_service[0] if found_service && found_service.length == 1
     end
     return unless roku_service
-    puts "udpSocket.E #{roku_service}"
 
     id_line = lines.grep /USN: UUID:ROKU:ECP:*/i
     if id_line.count == 1
       id_line = id_line[0]
       found_id = id_line.match /[^:]+$/
-      self.roku_id = found_id[0] if found_id.length == 1
+      self.roku_id = found_id[0] if found_id && found_id.length == 1
     end
-    puts "udpSocket.F #{roku_id}"
 
     @socket.close
     @state = :idle
     @delegate.roku_device_found
+  end
+
+  def channel_list
+    channel_list_retrieved = Proc.new { |response, error|
+      unless error.nil?
+        self.last_error = error
+        @delegate.roku_channels_retrieved {}
+        return
+      end
+      # parse into channels
+      puts "Channel List: #{response}"
+      @delegate.roku_channels_retrieved({ 'Netflix' => 2, 'Plex' => 33539 })
+    }
+    FragileHttpClient.get "#{roku_service}query/apps", channel_list_retrieved
   end
 
 end
