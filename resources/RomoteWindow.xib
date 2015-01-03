@@ -39,7 +39,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="240" height="480"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="skin_default" id="bj0-wO-Xka"/>
                     </imageView>
-                    <button toolTip="Up" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X7n-FA-exk">
+                    <button toolTip="Up" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X7n-FA-exk" customClass="PointerButton">
                         <rect key="frame" x="86" y="351" width="68" height="51"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="gyU-ue-eJC">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -49,7 +49,7 @@
                             <action selector="press_up:" target="-2" id="IH1-8Y-jx5"/>
                         </connections>
                     </button>
-                    <button toolTip="Select" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qz6-nQ-Tys">
+                    <button toolTip="Select" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qz6-nQ-Tys" customClass="PointerButton">
                         <rect key="frame" x="88" y="284" width="60" height="63"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="6E7-bh-Vzd">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -59,7 +59,7 @@
                             <action selector="press_select:" target="-2" id="8bk-rR-LCA"/>
                         </connections>
                     </button>
-                    <button toolTip="Left" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k6c-EF-SDK">
+                    <button toolTip="Left" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k6c-EF-SDK" customClass="PointerButton">
                         <rect key="frame" x="34" y="284" width="51" height="67"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="h6o-rL-ag3">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -69,7 +69,7 @@
                             <action selector="press_left:" target="-2" id="m59-u0-Khq"/>
                         </connections>
                     </button>
-                    <button toolTip="Right" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A9n-87-72b">
+                    <button toolTip="Right" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A9n-87-72b" customClass="PointerButton">
                         <rect key="frame" x="156" y="284" width="49" height="67"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="GGZ-en-L18">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -79,7 +79,7 @@
                             <action selector="press_right:" target="-2" id="6XZ-Il-gIa"/>
                         </connections>
                     </button>
-                    <button toolTip="Down" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjh-ns-wFS">
+                    <button toolTip="Down" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zjh-ns-wFS" customClass="PointerButton">
                         <rect key="frame" x="88" y="230" width="66" height="51"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="W0k-fu-ytM">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -89,7 +89,7 @@
                             <action selector="press_down:" target="-2" id="5E2-Qc-xDQ"/>
                         </connections>
                     </button>
-                    <button toolTip="Back" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uas-iR-Qxs">
+                    <button toolTip="Back" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uas-iR-Qxs" customClass="PointerButton">
                         <rect key="frame" x="34" y="423" width="80" height="49"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="axesIndependently" inset="2" id="Bbr-wD-PYD">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -99,7 +99,7 @@
                             <action selector="press_back:" target="-2" id="8Oz-S9-Pkp"/>
                         </connections>
                     </button>
-                    <button toolTip="Home" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cce-QC-cZh">
+                    <button toolTip="Home" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cce-QC-cZh" customClass="PointerButton">
                         <rect key="frame" x="123" y="423" width="82" height="49"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="axesIndependently" inset="2" id="y3j-YN-Hn2">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -109,7 +109,7 @@
                             <action selector="press_home:" target="-2" id="lKr-xf-8Dl"/>
                         </connections>
                     </button>
-                    <button toolTip="Replay" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vm4-tO-S5m">
+                    <button toolTip="Replay" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vm4-tO-S5m" customClass="PointerButton">
                         <rect key="frame" x="32" y="163" width="82" height="48"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="sKU-WA-yN2">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -119,7 +119,7 @@
                             <action selector="press_replay:" target="-2" id="Mkd-iy-YCr"/>
                         </connections>
                     </button>
-                    <button toolTip="Info" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WrZ-xq-rwK">
+                    <button toolTip="Info" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WrZ-xq-rwK" customClass="PointerButton">
                         <rect key="frame" x="123" y="163" width="82" height="46"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="YNZ-m6-hkg">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -129,7 +129,7 @@
                             <action selector="press_info:" target="-2" id="6ua-qY-bkA"/>
                         </connections>
                     </button>
-                    <button toolTip="Reverse" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-WD-Uvk">
+                    <button toolTip="Reverse" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-WD-Uvk" customClass="PointerButton">
                         <rect key="frame" x="34" y="104" width="51" height="51"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="m5r-mF-UMn">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -139,7 +139,7 @@
                             <action selector="press_reverse:" target="-2" id="Dhs-M9-9b0"/>
                         </connections>
                     </button>
-                    <button toolTip="Play/Pause" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0CK-nz-QO3">
+                    <button toolTip="Play/Pause" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0CK-nz-QO3" customClass="PointerButton">
                         <rect key="frame" x="93" y="104" width="55" height="51"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="eKS-Fp-A84">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -149,7 +149,7 @@
                             <action selector="press_play:" target="-2" id="F5T-I9-UvX"/>
                         </connections>
                     </button>
-                    <button toolTip="Forward" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgB-ga-Kiq">
+                    <button toolTip="Forward" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgB-ga-Kiq" customClass="PointerButton">
                         <rect key="frame" x="156" y="104" width="49" height="51"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="eJP-Sb-0XB">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
