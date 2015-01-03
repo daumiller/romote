@@ -72,7 +72,7 @@ class RomoteWindowController < NSWindowController
   def keypress(key)
     non_text_input
     return if @roku_service.nil?
-    @http.post "keypress/#{key}"
+    @http.post "keypress/#{key}" do; end
   end
 
   def press_back   (_sender) ; keypress 'Back'          ; end
@@ -93,7 +93,7 @@ class RomoteWindowController < NSWindowController
     non_text_input
     channel_name = sender.titleOfSelectedItem
     channel_id   = @channels[channel_name]
-    @http.post "launch/#{channel_id}"
+    @http.post "launch/#{channel_id}" do; end
   end
 
   def enter_text(sender)
