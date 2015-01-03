@@ -1,4 +1,4 @@
-class XmlChannelParser
+class XmlChannelParser < NSObject
   attr_accessor :channels
 
   def initialize
