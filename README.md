@@ -7,4 +7,4 @@ When the laptop is handy, but the remote is too far...
 * BSD licensed
   * Except for public domain CocoaAsyncSocket code.
 
-<br><center>![](screenshot.png)</center>
+![](screenshot.png)
