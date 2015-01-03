@@ -1,5 +1,4 @@
 # romote #
-__________
 
 When the laptop is handy, but the remote is too far...
 
@@ -8,4 +7,4 @@ When the laptop is handy, but the remote is too far...
 * BSD licensed
   * Except for public domain CocoaAsyncSocket code.
 
-![](screenshot.png)
+<br><center>![](screenshot.png)</center>
