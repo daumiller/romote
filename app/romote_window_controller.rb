@@ -120,7 +120,7 @@ class RomoteWindowController < NSWindowController
     @txt_keyboard_editor.setSelectedRange [@txt_keyboard.stringValue.length, 0]
   end
 
-  # don't let user directly use NSTextField, we wan't to control it (via keyUp)
+  # don't let user directly use NSTextField, we want to control it (via keyUp)
   def control(control, textShouldBeginEditing: text)
     control != @txt_keyboard
   end
