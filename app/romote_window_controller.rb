@@ -19,6 +19,9 @@ class RomoteWindowController < NSWindowController
 
   def windowDidLoad
     @lst_channel.removeAllItems
+    @txt_keyboard.setDelegate self
+    @txt_keyboard.selectText self
+    @txt_keyboard_editor = window.fieldEditor false, forObject: @txt_keyboard
     @roku_service = nil
     @discovery = RokuDiscovery.new self
     @discovery.search 3.0
@@ -69,8 +72,8 @@ class RomoteWindowController < NSWindowController
     @txt_keyboard.setStringValue ''
   end
 
-  def keypress(key)
-    non_text_input
+  def keypress(key, text_input = false)
+    non_text_input unless text_input
     return if @roku_service.nil?
     @http.post "keypress/#{key}" do; end
   end
@@ -88,7 +91,6 @@ class RomoteWindowController < NSWindowController
   def press_play   (_sender) ; keypress 'Play'          ; end
   def press_forward(_sender) ; keypress 'Fwd'           ; end
 
-
   def select_channel(sender)
     non_text_input
     channel_name = sender.titleOfSelectedItem
@@ -96,7 +98,31 @@ class RomoteWindowController < NSWindowController
     @http.post "launch/#{channel_id}" do; end
   end
 
-  def enter_text(sender)
+  def keyUp(event)
+    unichar = event.characters.characterAtIndex 0
+
+    # Backspace
+    if event.keyCode == 51
+      if @txt_keyboard.stringValue.length > 0
+        @txt_keyboard.stringValue = @txt_keyboard.stringValue[0...-1]
+        keypress 'Backspace', true
+      end
+    # Printable Characters (mostly filtering for non-arrow keys)
+    elsif NSCharacterSet.alphanumericCharacterSet.characterIsMember(unichar) ||
+          NSCharacterSet.punctuationCharacterSet. characterIsMember(unichar) ||
+          NSCharacterSet.symbolCharacterSet.      characterIsMember(unichar) ||
+          NSCharacterSet.whitespaceCharacterSet.  characterIsMember(unichar)
+      @txt_keyboard.stringValue = "#{@txt_keyboard.stringValue}#{event.characters[0]}"
+      keypress 'Lit_%' + event.characters[0].unpack('H*')[0], true
+    end
+
+    # enforce cursor @ EOL
+    @txt_keyboard_editor.setSelectedRange [@txt_keyboard.stringValue.length, 0]
+  end
+
+  # don't let user directly use NSTextField, we wan't to control it (via keyUp)
+  def control(control, textShouldBeginEditing: text)
+    control != @txt_keyboard
   end
 
 end
