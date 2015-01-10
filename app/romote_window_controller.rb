@@ -53,8 +53,7 @@ class RomoteWindowController < NSWindowController
                                 otherButton: nil,
                   informativeTextWithFormat: 'You can continue anyway; but direct channel selection will not be available.'
         result = alert.runModal
-        get_channels if result NSAlertDefaultReturn
-        return
+        get_channels if result == NSAlertDefaultReturn
       else
         result.object.delegate = XmlChannelParser.new
         result.object.parse

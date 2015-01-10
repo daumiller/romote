@@ -94,7 +94,7 @@ class RokuDiscovery < NSObject
                               otherButton: 'Exit',
                 informativeTextWithFormat: (first_manual_attempt ? 'Roku IP address:' : 'The address entered was not correctly formatted.')
       roku_service = NSTextField.alloc.initWithFrame NSMakeRect(0, 0, 200, 24)
-      roku_service.setStringValue:'192.168.'
+      roku_service.setStringValue '192.168.'
       alert.setAccessoryView roku_service
 
       result = alert.runModal
